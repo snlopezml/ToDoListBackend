@@ -14,26 +14,23 @@ public class TareaController {
         this.repositorio = repositorio;
     }
 
-    // Dame todas las tareas
     @GetMapping
     public List<Tarea> obtenerTodas() {
         return repositorio.findAll();
     }
 
-    // Guarda una tarea nueva
     @PostMapping
     public Tarea crear(@RequestBody Tarea tarea) {
+        tarea.setId(null);
         return repositorio.save(tarea);
     }
 
-    // Actualiza una tarea existente
     @PutMapping("/{id}")
     public Tarea actualizar(@PathVariable Long id, @RequestBody Tarea tarea) {
         tarea.setId(id);
         return repositorio.save(tarea);
     }
 
-    // Borra una tarea por su id
     @DeleteMapping("/{id}")
     public void borrar(@PathVariable Long id) {
         repositorio.deleteById(id);
